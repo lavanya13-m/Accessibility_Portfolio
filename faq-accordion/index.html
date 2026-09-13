@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCORDION</title>
+     <style>
+    body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        max-width: 700px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        color: #1a1a1a;
+        background: #fafafa;
+    }
+    header h1 {
+        color: #1a1a2e;
+        border-bottom: 3px solid #2563eb;
+        padding-bottom: 0.5rem;
+    }
+    section {
+        margin-bottom: 0.75rem;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    section h2 {
+        margin: 0;
+        font-size: 1rem;
+    }
+    button {
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 1rem;
+        background: #ffffff;
+        color: #1a1a2e;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.2s ease;
+    }
+    button:hover {
+        background: #f0f4ff;
+    }
+    button:focus-visible {
+        outline: 3px solid #2563eb;
+        outline-offset: 2px;
+    }
+    button::after {
+        content: "+";
+        font-size: 1.3rem;
+        color: #2563eb;
+    }
+    button[aria-expanded="true"]::after {
+        content: "\2212";
+    }
+    section p {
+        padding: 1rem;
+        margin: 0;
+        background: #fbfbfd;
+        border: 1px solid #ddd;
+        border-top: none;
+        display: none;
+        line-height: 1.5;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Web Accessibility FAQ</h1>
+    </header>
+    <main>
+        <section>
+            <h2><button aria-expanded="false" aria-controls="wcag-answer">What is WCAG?</button></h2>
+            <p id="wcag-answer">WCAG (Web Content Accessibility Guidelines) is a set of international standards for making web content accessible to people with disabilities.</p>
+        </section>
+        <section>
+            <h2><button aria-expanded="false" aria-controls="screen-reader-answer">What is a screen reader?</button></h2>
+            <p id="screen-reader-answer">A screen reader is a software application that reads aloud the text and other content on a computer or mobile device, helping people with visual impairments navigate and use technology.</p>
+        </section>
+        <section>
+            <h2><button aria-expanded="false" aria-controls="aria-answer">What is ARIA?</button></h2>
+            <p id="aria-answer">ARIA (Accessible Rich Internet Applications) is a set of attributes that can be added to HTML elements to improve accessibility for people with disabilities, particularly those using assistive technologies.</p>
+        </section>
+        <section>
+            <h2><button aria-expanded="false" aria-controls="heading-structure-answer">Why does heading structure matter for accessibility?</button></h2>
+            <p id="heading-structure-answer">Proper heading structure helps screen reader users navigate and understand the organization of content on a webpage.</p>
+        </section>
+    </main>
+<script>
+        const buttons = document.querySelectorAll("button[aria-expanded]");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const isOpen = button.getAttribute("aria-expanded") === "true";
+                const answer = document.getElementById(button.getAttribute("aria-controls"));
+
+                button.setAttribute("aria-expanded", !isOpen);
+                answer.style.display = isOpen ? "none" : "block";
+            });
+        });
+    </script>
+
+</body>
+</html>
